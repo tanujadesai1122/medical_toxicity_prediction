@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Medicine Toxicity Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>💊 Medicine Toxicity Prediction</h1>
+
+        <p class="subtitle">
+            Predict whether a molecule is Toxic or Non-Toxic using Machine Learning.
+        </p>
+
+        <form action="/predict" method="POST">
+
+            <div class="input-group">
+                <label>Molecular Weight</label>
+                <input
+                    type="number"
+                    step="any"
+                    name="MolecularWeight"
+                    placeholder="Example: 320.5"
+                    required>
+            </div>
+
+            <div class="input-group">
+                <label>LogP</label>
+                <input
+                    type="number"
+                    step="any"
+                    name="LogP"
+                    placeholder="Example: 2.8"
+                    required>
+            </div>
+
+            <div class="input-group">
+                <label>HBD</label>
+                <input
+                    type="number"
+                    step="1"
+                    name="HBD"
+                    placeholder="Example: 2"
+                    required>
+            </div>
+
+            <div class="input-group">
+                <label>HBA</label>
+                <input
+                    type="number"
+                    step="1"
+                    name="HBA"
+                    placeholder="Example: 5"
+                    required>
+            </div>
+
+            <div class="input-group">
+                <label>Rotatable Bonds</label>
+                <input
+                    type="number"
+                    step="1"
+                    name="RotatableBonds"
+                    placeholder="Example: 4"
+                    required>
+            </div>
+
+            <div class="input-group">
+                <label>TPSA</label>
+                <input
+                    type="number"
+                    step="any"
+                    name="TPSA"
+                    placeholder="Example: 78.4"
+                    required>
+            </div>
+
+            <button type="submit">
+                Predict Toxicity
+            </button>
+
+        </form>
+
+        {% if prediction %}
+
+        <div class="result">
+
+            <h2>Prediction Result</h2>
+
+            <div class="box">
+
+                <h3>{{ prediction }}</h3>
+
+                <p>
+                    Toxicity Percentage :
+                    <strong>{{ probability }}%</strong>
+                </p>
+
+                <p>
+                    Confidence :
+                    <strong>{{ confidence }}%</strong>
+                </p>
+
+                <p>
+                    Risk Level :
+                    <strong>{{ risk }}</strong>
+                </p>
+
+            </div>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</body>
+</html>
